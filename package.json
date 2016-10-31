@@ -1,0 +1,29 @@
+{
+  "name": "reverse-space-invaders",
+  "version": "0.1.0",
+  "description": "A space invaders game reversed. Be the evil alien fleet!",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://marklabenski@github.com/marklabenski/reverse-space-invaders.git"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/marklabenski/reverse-space-invaders/issues"
+  },
+  "homepage": "https://github.com/marklabenski/reverse-space-invaders#readme",
+  "devDependencies": {
+    "babel-core": "^5.8.25",
+    "chai": "^3.3.0",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.3.0",
+    "gulp-mocha": "^2.1.3",
+    "gulp-util": "^3.0.7",
+    "mocha": "^2.3.3",
+    "webpack": "^1.12.2"
+  }
+}
