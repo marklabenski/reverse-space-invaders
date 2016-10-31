@@ -5,12 +5,11 @@ gameAudio.volume.sfx = 1;
 gameAudio.volume.music = 1;
 gameAudio.audioCounter = 0;
 gameAudio.audioPath = "assets/audio/";
-gameAudio.audioDataPath = "javascript/audio/";
 gameAudio.verbose = true;
 
 var oReq = new XMLHttpRequest();
 oReq.onload = reqListener;
-oReq.open("get", gameAudio.audioDataPath + "audiofiles.json", false); // false = async - should be a better solution than this
+oReq.open("get", gameAudio.audioPath + "audiofiles.json", false); // false = async - should be a better solution than this
 oReq.send();
 
 function reqListener(e) {
@@ -87,3 +86,5 @@ gameAudio.tattler = function (gossip) {
     console.log(gossip);
   }
 };
+
+export {gameAudio}
