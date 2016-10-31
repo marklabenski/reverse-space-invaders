@@ -1,0 +1,50 @@
+{
+  "sound1": {
+    "file": "sound1.mp3",
+    "name": "supersound",
+    "description": "fucking hell great sound",
+    "type": "sfx"
+  },
+  "sound2": {
+    "file": "sound2.mp3",
+    "name": "How horny is that then?",
+    "description": "YIPPEEE!",
+    "type": "sfx"
+  },
+  "sound3": {
+    "file": "sound3.mp3",
+    "name": "Unbelieveable sound",
+    "description": "quite mature sound!",
+    "type": "sfx"
+  },
+  "sound4": {
+    "file": "sound4.mp3",
+    "name": "Weird sound",
+    "description": "this is tireless!",
+    "type": "sfx"
+  },
+  "sound5": {
+    "file": "sound5.mp3",
+    "name": "Hammer sound",
+    "description": "very shiny, Captain!",
+    "type": "sfx"
+  },
+  "sound6": {
+    "file": "sound6.mp3",
+    "name": "supersound",
+    "description": "dont think twice, its all crap",
+    "type": "sfx"
+  },
+  "sound7": {
+    "file": "sound7.mp3",
+    "name": "more a fart as a sound",
+    "description": "bork bork bork bork!",
+    "type": "sfx"
+  },
+  "music1": {
+    "file": "music1.mp3",
+    "name": "Sulu Archipelago",
+    "description": "Quite nice music!",
+    "type": "music"
+  }
+}
