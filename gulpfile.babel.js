@@ -4,6 +4,12 @@ import mocha from 'gulp-mocha';
 import gutil from 'gulp-util';
 import webpack from 'webpack';
 import webpackConfig from './webpack.config.babel';
+import ghPages from 'gulp-gh-pages';
+
+gulp.task('deploy', function() {
+  return gulp.src('./dist/**/*')
+    .pipe(ghPages());
+});
 
 gulp.task('default', ['webpack', 'copy']);
 
