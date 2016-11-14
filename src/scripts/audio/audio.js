@@ -9,7 +9,7 @@ gameAudio.verbose = true;
 
 var oReq = new XMLHttpRequest();
 oReq.onload = reqListener;
-oReq.open("get", gameAudio.audioPath + "audiofiles.json", false); // false = async - should be a better solution than this
+oReq.open("get", gameAudio.audioPath + "audiofiles.json", true);
 oReq.send();
 
 function reqListener(e) {

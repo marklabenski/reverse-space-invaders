@@ -1,6 +1,8 @@
 import path from 'path';
 
 module.exports = {
+	debug: true,
+	devtool: '#inline-source-map',
 	entry: {
 	  main: './target/main.js'
 	},
