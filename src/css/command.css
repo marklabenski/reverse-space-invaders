@@ -1,0 +1,35 @@
+html, body {
+    background-color: #111;
+    margin: 0;
+    color: #5555ff;
+}
+
+.grid, .selection, .command-container {
+    border: 1px solid #7777ff
+}
+
+.command-container {
+    width: 800px;
+    height: 600px;
+    margin: auto;
+    top: 20px;
+    position: relative;
+}
+
+.grid {
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    left: 360px;
+    top: 57px;
+    background-color: #111133;
+}
+
+.selection {
+    position: absolute;
+    width: 100px;
+    height: 500px;
+    left: 30px;
+    top: 40px;
+    background-color: #111133;
+}
