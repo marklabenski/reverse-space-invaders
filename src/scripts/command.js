@@ -30,7 +30,31 @@ invaders[2] = {
 
 //creates the Command view in which the player setups his invasion force
 function Command() {
+    
+    //default functionality
     this.init = function() {
+        this.createGrids();
+        this.createInvaderSelection();
+        this.addListeningPost();
+    };
+
+    //builds up the grid
+    this.createGrid = function() {
+
+    };
+
+    //so that people see what they got
+    this.createInvaderSelection = function() {
+
+    };
+
+    //get the list of current invaders
+    this.fetchInvaders = function() {
+
+    };
+
+    //adds event listeners
+    this.addListeningPost = function() {
 
     }
 }
