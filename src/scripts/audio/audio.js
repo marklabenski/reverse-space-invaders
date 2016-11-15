@@ -7,10 +7,13 @@ gameAudio.audioCounter = 0;
 gameAudio.audioPath = "assets/audio/";
 gameAudio.verbose = true;
 
-var oReq = new XMLHttpRequest();
-oReq.onload = reqListener;
-oReq.open("get", gameAudio.audioPath + "audiofiles.json", true);
-oReq.send();
+(gameAudio.load = function () {
+  var oReq = new XMLHttpRequest();
+  oReq.onload = reqListener;
+  oReq.open("get", gameAudio.audioPath + "audiofiles.json", true);
+  oReq.send();
+  console.log("Audio data loaded");
+})();
 
 function reqListener(e) {
   gameAudio.files = JSON.parse(this.responseText);
