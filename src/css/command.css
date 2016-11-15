@@ -5,7 +5,8 @@ html, body {
 }
 
 .grid, .selection, .command-container {
-    border: 1px solid #53befe
+    border: 1px solid #53befe;
+    border-radius: 5px;
 }
 
 .command-container {
