@@ -3,15 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>SIR - Space Invaders Reverse</title>
-
+  <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
 <div class="scenes">
   <div id="loading" class="scene"></div>
-  <div id="title" class="scene"></div>
+  <div id="title" class="scene">
+    <div class="maintitle">
+      <h1>SPACE INVADERS REVERSE</h1>
+    </div>
+    <ul>
+      <li class="menu">Tutorial</li>
+      <li class="menu">Start</li>
+      <li class="menu">Highscore</li>
+      <li class="menu">I wetted my pants! Let me out play cookie clicker!</li>
+    </ul>
+  </div>
   <div id="setup" class="scene"></div>
   <div id="run" class="scene">
-    <canvas id="actionCanvas" width="100%" height="100" style="border:1px solid #000000;">
+    <canvas id="actionCanvas">
     </canvas>
   </div>
 </div>

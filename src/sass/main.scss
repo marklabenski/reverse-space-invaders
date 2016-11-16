@@ -1,3 +1,41 @@
+@font-face {
+  font-family: pixel;
+  src: url("../assets/font/pixeled.ttf");
+}
+
 body {
-  background-color: grey; 
+  background-color: #000;
+  color: #6fec00;
+  font-family: pixel;
+}
+
+h1 {
+
+  font-size: 40px;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+
+.scene {
+  display: none;
+}
+
+.scene#title {
+  display: block;
+  margin-top: 200px;
+  ul {
+    text-align: center;
+    margin: 0;
+    margin-top: 40px;
+    padding: 0;
+    li.menu {
+      list-style-type: none;
+
+      &:hover, &.selected {
+        font-size: 1.4em;
+        color: #96ff38;
+      }
+    }
+  }
 }
