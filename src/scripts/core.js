@@ -22,11 +22,11 @@ gameCore.tick = {
       });
     }
   },
-  '_worker': function () {
+  'worker': function () {
     gameCore.tick.pulse++;
     gameCore.tick.taskSheet._execute();
   }
 };
 
-var alive = setInterval(gameCore.tick._worker, gameCore.tick.speed);
+var alive = setInterval(gameCore.tick.worker, gameCore.tick.speed);
 export { gameCore }

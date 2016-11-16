@@ -5,6 +5,7 @@ import gutil from 'gulp-util';
 import webpack from 'webpack';
 import webpackConfig from './webpack.config.babel';
 import ghPages from 'gulp-gh-pages';
+import sass from 'gulp-sass';
 
 gulp.task('deploy', function() {
   return gulp.src('./dist/**/*')
@@ -37,6 +38,22 @@ gulp.task('test', ['babel'], () => {
 
 gulp.task('watch-test', () => {
   return gulp.watch(['javascript/**', 'test/**'], ['test']);
+});
+
+
+
+
+gulp.task('sass', function (){
+  gulp.src(['./src/sass/*.scss', '!./dev/sass/_variables.scss'])
+    .pipe(sass({
+      includePaths: ['./dev/sass'],
+      outputStyle: 'expanded'
+    }))
+    .pipe(gulp.dest('./dist/css'))
+});
+
+gulp.task('watch', () => {
+  gulp.watch('src/sass/*.scss', ['sass']);
 });
 
 gulp.task('webpack', ['test'], function(callback) {

@@ -6,15 +6,17 @@
 
 </head>
 <body>
-  <button onClick="gameAudio.play('sound1')">FIRE 1!</button>
-  <button onClick="gameAudio.play('sound2')">FIRE 2!</button>
-  <button onClick="gameAudio.play('sound3')">FIRE 3!</button>
-  <button onClick="gameAudio.play('sound4')">FIRE 4!</button>
-  <button onClick="gameAudio.play('sound5')">FIRE 5!</button>
-  <button onClick="gameAudio.play('sound6')">FIRE 6!</button>
-  <button onClick="gameAudio.play('music1')">FIRE Music!</button>
-  <button onClick="gameAudio.setVolume('music',0.4)">Music less loud</button>
-  <script src="main.bundle.js"></script>
+<div class="scenes">
+  <div id="loading" class="scene"></div>
+  <div id="title" class="scene"></div>
+  <div id="setup" class="scene"></div>
+  <div id="run" class="scene">
+    <canvas id="actionCanvas" width="100%" height="100" style="border:1px solid #000000;">
+    </canvas>
+  </div>
+</div>
+
+
 </body>
 
 </html>
