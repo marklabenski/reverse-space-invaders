@@ -1,5 +1,5 @@
 html, body {
-    background-color: #111;
+    background-color: #000;
     margin: 0;
     color: #000101;
 }
@@ -8,6 +8,12 @@ html, body {
     border: 1px solid #53befe;
     border-radius: 5px;
 }
+
+/* 000101
+152A37
+28536C
+387BA2
+53BEFE*/
 
 .command-container {
     width: 800px;
@@ -36,4 +42,11 @@ html, body {
     top: 40px;
     background-color: #152a37;
     box-shadow: inset 0 0 10px rgba(83, 190, 254, 0.5), 0 0 10px rgba(83, 190, 254, 0.5);
+    overflow: hidden
+}
+
+.selection-invader {
+    width: 80px;
+    padding: 10px 10px 10px 10px;
+    position: relative;
 }
