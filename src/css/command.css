@@ -15,7 +15,7 @@ html, body {
 387BA2
 53BEFE*/
 
-.command-container {
+.command_container {
     width: 800px;
     height: 600px;
     margin: auto;
@@ -45,8 +45,25 @@ html, body {
     overflow: hidden
 }
 
-.selection-invader {
+.selection_invader {
     width: 80px;
     padding: 10px 10px 10px 10px;
     position: relative;
+    cursor: move;
+}
+
+.grid_element_container {
+    box-shadow: inset 0 0 10px rgba(83, 190, 254, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.grid_element {
+    box-shadow: inset 0 0 10px rgba(83, 190, 254, 0.5);
+}
+.grid_element:hover {
+    background-color: rgba(83, 190, 254, 0.1);
 }

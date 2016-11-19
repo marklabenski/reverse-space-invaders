@@ -4,7 +4,8 @@ game = {
     credits: 10,
     score: 0,
     sound: 0,
-    music: 0
+    music: 0,
+    grid: { rows: 3, cols: 4 }
 };
 
 //dummy invader array
@@ -43,6 +44,36 @@ function Command() {
     //builds up the grid
     this.createGrid = function() {
 
+        //lets see how large the bugger is
+        var gridSize = {};
+        gridSize.width = document.getElementsByClassName("grid")[0].offsetWidth;
+        gridSize.height = document.getElementsByClassName("grid")[0].offsetHeight;
+
+        //so what is the maximum possible size of a grids element?
+        var maxGridElementWidth = Math.floor(gridSize.width / game.grid.cols);
+        var maxGridElementHeight = Math.floor(gridSize.height / game.grid.rows);
+
+        //now considering the grids elements are square...
+        var gridElementSize;
+        if(maxGridElementWidth <= maxGridElementHeight) {
+            gridElementSize = maxGridElementWidth;
+        }
+        else {
+            gridElementSize = maxGridElementHeight;
+        }
+
+        //lets adjust the elements container a bit
+        document.getElementsByClassName("grid_element_container")[0].style.width = (gridElementSize * game.grid.cols) + "px";
+        document.getElementsByClassName("grid_element_container")[0].style.height = (gridElementSize * game.grid.rows) + "px";
+
+        //now add the grid elements
+        var gridHTML = "";
+        var gridElementCount = game.grid.cols * game.grid.rows;
+        for(var i = 0; i < gridElementCount; i++) {
+            gridHTML += '<div class="grid_element" style="width: ' + gridElementSize + 'px; height: ' + gridElementSize + 'px"></div>';
+        }
+        document.getElementsByClassName("grid_element_container")[0].innerHTML = gridHTML;
+
     };
 
     //so that people see what they got
@@ -52,7 +83,7 @@ function Command() {
                 var invaderFileName = invaders[i].name.toLocaleLowerCase().replace(" ", "_");
                 var invader = document.createElement("img");
                 invader.src = "assets/images/invaders/" + invaderFileName + ".svg";
-                invader.setAttribute("class", "selection-invader");
+                invader.setAttribute("class", "selection_invader");
                 invader.setAttribute("draggable", "true");
                 document.getElementsByClassName("selection")[0].appendChild(invader);
             }
