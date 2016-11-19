@@ -5,7 +5,7 @@ game = {
     score: 0,
     sound: 0,
     music: 0,
-    grid: { rows: 3, cols: 4 }
+    grid: { rows: 4, cols: 8 }
 };
 
 //dummy invader array
@@ -33,6 +33,7 @@ cmd.init();
 
 //creates the Command view in which the player setups his invasion force
 function Command() {
+    this.draggedInvader = false;
 
     //default functionality
     this.init = function() {
@@ -74,6 +75,13 @@ function Command() {
         }
         document.getElementsByClassName("grid_element_container")[0].innerHTML = gridHTML;
 
+        var elementList = document.getElementsByClassName("grid_element");
+        for(i = 0; i< elementList.length; i++) {
+            //elementList[i].addEventListener('drop', this.onInvaderDrop, false);
+            elementList[i].addEventListener('drop', this.onInvaderDrop, false);
+            elementList[i].addEventListener('dragenter', this.onInvaderDragEnter, false);
+            elementList[i].addEventListener('dragover', this.onInvaderDragOver, false);
+        }
     };
 
     //so that people see what they got
@@ -85,15 +93,26 @@ function Command() {
                 invader.src = "assets/images/invaders/" + invaderFileName + ".svg";
                 invader.setAttribute("class", "selection_invader");
                 invader.setAttribute("draggable", "true");
+                invader.setAttribute("data-invader_id", i);
+                invader.addEventListener('dragstart', this.onInvaderDragStart, false);
+                invader.addEventListener('dragend', this.onInvaderDragEnd, false);
                 document.getElementsByClassName("selection")[0].appendChild(invader);
             }
         }
     };
 
+    this.onInvaderDragEnter = function(evt) {
+        evt.preventDefault();
+    };
+
+    this.onInvaderDragOver = function(evt) {
+        evt.preventDefault();
+    };
+
     //checks if the invader is available in this level
     this.isValidInvader = function(src) {
         return true;
-    }
+    };
 
     //get the list of current invaders
     this.fetchInvaders = function() {
@@ -103,5 +122,26 @@ function Command() {
     //adds event listeners
     this.addListeningPost = function() {
 
-    }
+
+    };
+
+    //so... this happens if I drag one of those things...
+    this.onInvaderDragStart = function(evt) {
+        var invaderId = evt.target.dataset.invader_id;
+        cmd.draggedInvader = invaderId;
+    };
+
+    //so... this happens if I drag one of those things...
+    this.onInvaderDrop = function(evt) {
+        evt.preventDefault();
+
+        var invaderFileName = invaders[cmd.draggedInvader].name.toLocaleLowerCase().replace(" ", "_");
+        var droppedInvader = document.createElement("img");
+        droppedInvader.src = "assets/images/invaders/" + invaderFileName + ".svg";
+        droppedInvader.setAttribute("class", "dropped_invader");
+        droppedInvader.setAttribute("draggable", "true");
+        droppedInvader.setAttribute("data-invader_id", cmd.draggedInvader);
+        evt.target.appendChild(droppedInvader);
+    };
 }
+
