@@ -33,7 +33,11 @@ cmd.init();
 
 //creates the Command view in which the player setups his invasion force
 function Command() {
-    this.draggedInvader = false;
+    this.dragInfo = {
+        dragId: false,
+        dragSource: false,
+        dragCurrent: false
+    };
 
     //default functionality
     this.init = function() {
@@ -75,6 +79,7 @@ function Command() {
         }
         document.getElementsByClassName("grid_element_container")[0].innerHTML = gridHTML;
 
+        //register dropped invaders
         var elementList = document.getElementsByClassName("grid_element");
         for(i = 0; i< elementList.length; i++) {
             //elementList[i].addEventListener('drop', this.onInvaderDrop, false);
@@ -122,26 +127,67 @@ function Command() {
     //adds event listeners
     this.addListeningPost = function() {
 
+        //we want to know where the currently dragged object is, and where it comes from
+        document.getElementsByClassName("selection")[0].addEventListener("dragenter", this.onDragEnter, false);
+        document.getElementsByClassName("command_container")[0].addEventListener("dragenter", this.onDragEnter, false);
+        document.getElementsByClassName("grid_element_container")[0].addEventListener("dragenter", this.onDragEnter, false);
+    };
 
+    this.onDragEnter = function(evt) {
+        if(cmd.hasClass(evt.target, "selection") || cmd.hasClass(evt.target, "selection_invader")) {
+            cmd.dragInfo.dragCurrent = "selection";
+        }
+        else if(cmd.hasClass(evt.target, "command_container")) {
+            cmd.dragInfo.dragCurrent = "other";
+        }
+        else if(cmd.hasClass(evt.target, "grid_element_container") || cmd.hasClass(evt.target, "grid_element")) {
+            cmd.dragInfo.dragCurrent = "grid";
+        }
     };
 
     //so... this happens if I drag one of those things...
     this.onInvaderDragStart = function(evt) {
         var invaderId = evt.target.dataset.invader_id;
-        cmd.draggedInvader = invaderId;
+        cmd.dragInfo.dragId = invaderId;
+        cmd.dragInfo.dragSource =
+        cmd.dragInfo.dragCurrent = "selection";
+    };
+
+    //so... this happens if I drag one of those things...
+    this.onInvaderDragEnd = function(evt) {
+        if(cmd.dragInfo.dragId) {
+            cmd.dragInfo.dragId =
+            cmd.dragInfo.dragSource = false;
+        }
     };
 
     //so... this happens if I drag one of those things...
     this.onInvaderDrop = function(evt) {
         evt.preventDefault();
 
-        var invaderFileName = invaders[cmd.draggedInvader].name.toLocaleLowerCase().replace(" ", "_");
+        var invaderFileName = invaders[cmd.dragInfo.dragId].name.toLocaleLowerCase().replace(" ", "_");
         var droppedInvader = document.createElement("img");
         droppedInvader.src = "assets/images/invaders/" + invaderFileName + ".svg";
         droppedInvader.setAttribute("class", "dropped_invader");
         droppedInvader.setAttribute("draggable", "true");
         droppedInvader.setAttribute("data-invader_id", cmd.draggedInvader);
         evt.target.appendChild(droppedInvader);
+
+        cmd.dragInfo.dragId =
+        cmd.dragInfo.dragSource = false;
+    };
+
+    //lets make it simpplier to check whether an object has a class
+    this.hasClass = function(haystack, needle) {
+        var arClassName = haystack.className.split(" ");
+        var gotIt = false;
+        for(var i = 0; i < arClassName.length; i++) {
+            if(arClassName[i] == needle) {
+                gotIt = true;
+                break;
+            }
+        }
+        return gotIt;
     };
 }
 
