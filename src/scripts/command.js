@@ -133,6 +133,7 @@ function Command() {
         document.getElementsByClassName("grid_element_container")[0].addEventListener("dragenter", this.onDragEnter, false);
     };
 
+    //I want to know when I drag something here
     this.onDragEnter = function(evt) {
         if(cmd.hasClass(evt.target, "selection") || cmd.hasClass(evt.target, "selection_invader")) {
             cmd.dragInfo.dragCurrent = "selection";
@@ -145,7 +146,7 @@ function Command() {
         }
     };
 
-    //so... this happens if I drag one of those things...
+    //so... this happens if I start dragging one of those things...
     this.onInvaderDragStart = function(evt) {
         var invaderId = evt.target.dataset.invader_id;
         cmd.dragInfo.dragId = invaderId;
@@ -153,7 +154,7 @@ function Command() {
         cmd.dragInfo.dragCurrent = "selection";
     };
 
-    //so... this happens if I drag one of those things...
+    //so... this happens if I stop dragging one of those things...
     this.onInvaderDragEnd = function(evt) {
         if(cmd.dragInfo.dragId) {
             cmd.dragInfo.dragId =
@@ -161,7 +162,7 @@ function Command() {
         }
     };
 
-    //so... this happens if I drag one of those things...
+    //so... this happens if I drop one of those things...
     this.onInvaderDrop = function(evt) {
         evt.preventDefault();
 
@@ -177,7 +178,7 @@ function Command() {
         cmd.dragInfo.dragSource = false;
     };
 
-    //lets make it simpplier to check whether an object has a class
+    //lets make it simpler to check whether an object has a class
     this.hasClass = function(haystack, needle) {
         var arClassName = haystack.className.split(" ");
         var gotIt = false;
