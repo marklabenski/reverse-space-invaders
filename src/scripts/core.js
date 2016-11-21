@@ -1,5 +1,9 @@
 /**
  * Created by christianmadlener on 15.11.16.
+ *
+ * TODO:  - timeout functionality
+ *        - check for already existing tasks on creation
+ *
  */
 
 var gameCore = {};

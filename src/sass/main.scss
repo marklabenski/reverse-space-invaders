@@ -24,7 +24,11 @@ h1 {
 .scene#title {
   display: block;
   margin-top: 200px;
+
   ul {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
     text-align: center;
     margin: 0;
     margin-top: 40px;
@@ -36,6 +40,7 @@ h1 {
         font-size: 1.4em;
         color: #96ff38;
       }
+
     }
   }
 }
