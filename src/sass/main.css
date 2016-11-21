@@ -1,0 +1,40 @@
+@font-face {
+  font-family: pixel;
+  src: url("../assets/font/pixeled.ttf"); }
+body {
+  background-color: #000;
+  color: #6fec00;
+  font-family: pixel; }
+
+h1 {
+  font-size: 40px;
+  margin: auto;
+  text-align: center;
+  width: 100%; }
+
+.scene {
+  opacity: 1;
+  -webkit-transition: opacity 0.8s ease-out;
+  display: none; }
+  .scene.fadeOut {
+    opacity: 0; }
+  .scene.shown {
+    display: block; }
+
+.scene#title {
+  margin-top: 200px; }
+  .scene#title ul {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+    margin: 0;
+    margin-top: 40px;
+    padding: 0; }
+    .scene#title ul li.menu {
+      list-style-type: none; }
+      .scene#title ul li.menu:hover, .scene#title ul li.menu.selected {
+        font-size: 1.4em;
+        color: #96ff38; }
+
+/*# sourceMappingURL=main.css.map */

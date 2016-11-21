@@ -18,11 +18,18 @@ h1 {
 }
 
 .scene {
+  opacity: 1;
+  -webkit-transition: opacity 0.8s ease-out;
+  &.fadeOut {
+    opacity: 0;
+  }
   display: none;
+  &.shown {
+    display: block;
+  }
 }
 
 .scene#title {
-  display: block;
   margin-top: 200px;
 
   ul {
