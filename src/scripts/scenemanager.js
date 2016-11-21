@@ -4,7 +4,7 @@
 
 var sceneManager = {
   "launch": function(scene){
-    console.log("launch scene", scene);
+    console.log("scenemanager / launch scene:", scene);
   }
 }
 
