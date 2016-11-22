@@ -20,10 +20,11 @@ var sceneManager = {
     } else {
       document.querySelector("#" + globalScene).classList.add("shown");
     }
+    gameAudio.play(gameAudio.playList[globalScene], false);
   }
 };
 
-document.querySelectorAll("li").forEach(function (el) {
+document.querySelectorAll(".titleList .menu").forEach(function (el) {
   el.addEventListener("click", function (cel) {
     sceneManager.launch(cel.currentTarget.dataset.scene);
   });

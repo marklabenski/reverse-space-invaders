@@ -27,13 +27,30 @@ gameAudio.setVolume = function (audioType, volume) {
     if (volume > 1) volume = 1;
     this.volume[audioType] = volume;
     Object.keys(this.jukeBox).map(function (el) {
-      if (gameAudio.files[el].type === audioType) {
+      if (gameAudio.jukeBox[el].type === audioType) {
         gameAudio.jukeBox[el].volume = volume;
       }
     });
     gameAudio.tattler("Volume for " + audioType + " was set to " + volume);
   }
 };
+
+gameAudio.fadeOut = function(length) {
+  Object.keys(this.jukeBox).forEach(function(el) {
+    var internalCounter = 0;
+    if (gameAudio.jukeBox[el].type === "music") {
+      gameCore.tick.taskSheet.add("_fadeOutWorker", 100);
+    }
+  });
+  };
+
+
+gameAudio._fadeOutWorker = function() {
+  console.log("fadeOutWorkerSCHUBI");
+  var fadeOutStep = 0.1;
+  var newVal = gameAudio.volume.music - fadeOutStep;
+  this.setVolume("music", newVal);
+}
 
 gameAudio.getVolume = function (audioType) {
   return this.volume[audioType];
@@ -58,11 +75,12 @@ gameAudio.setPosition = function (soundFile, audioPosition) {
 };
 
 gameAudio.play = function (soundFile, playAsLoop) {
-  var gameAudioType = this.files[soundFile].type;
+  var gameAudioType = gameAudio.files[soundFile].type;
   var actualAudioPath = this.audioPath + ((gameAudioType === "sfx") ? "sfx" : "music" ) + "/" + this.files[soundFile].file;
   var tmpName = soundFile + gameAudio.audioCounter;
   gameAudio.audioCounter++;
   this.jukeBox[tmpName] = new Audio(actualAudioPath);
+  this.jukeBox[tmpName].type = gameAudioType;
   if (playAsLoop) this.jukeBox[soundFile].loop = true;
   this.jukeBox[tmpName].play();
   gameAudio.tattler(tmpName + " has started");

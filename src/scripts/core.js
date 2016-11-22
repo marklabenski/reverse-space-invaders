@@ -8,7 +8,7 @@
 
 var gameCore = {};
 gameCore.tick = {
-  'speed': 1000,
+  'speed': 100,
   'pulse': 0,
   'taskSheet': {
     'tasks': {},
@@ -19,15 +19,19 @@ gameCore.tick = {
       delete this.tasks[task];
     },
     '_execute': function () {
-      Object.keys(this.tasks).map(function (el) {
+      Object.keys(gameCore.tick.taskSheet.tasks).map(function (el) {
+
         var func = el;
         var value = gameCore.tick.taskSheet.tasks[el];
-        if (gameCore.tick.pulse % value === 0) window[func]();
+        console.log("executing...", gameCore.tick.pulse , value, el);
+        if (gameCore.tick.pulse % value === 0) {
+          window.gameAudio[el]();
+        }
       });
     }
   },
   'worker': function () {
-    gameCore.tick.pulse++;
+    gameCore.tick.pulse+=gameCore.tick.speed;
     gameCore.tick.taskSheet._execute();
   }
 };
