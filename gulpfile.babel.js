@@ -54,6 +54,9 @@ gulp.task('sass', function (){
 
 gulp.task('watch', () => {
   gulp.watch('src/sass/*.scss', ['sass']);
+  gulp.watch('src/scripts/*.js', ['default']);
+  gulp.watch('src/scripts/audio/*.js', ['default']);
+  gulp.watch('src/index.html', ['default']);
 });
 
 gulp.task('webpack', ['test'], function(callback) {

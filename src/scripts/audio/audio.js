@@ -13,6 +13,14 @@ function reqListener(e) {
   gameAudio.files = JSON.parse(this.responseText);
 }
 
+gameAudio.playList = {
+  "title": "music1",
+  "commandpost": "music1",
+  "run": "music1",
+  "highscore": "music1",
+  "impressum": "music1"
+}
+
 gameAudio.setVolume = function (audioType, volume) {
   if (audioType === "sfx" || audioType === "music") {
     if (volume < 0) volume = 0;

@@ -6,3 +6,6 @@ window.gameCore = gameCore;
 
 import {sceneManager} from './scenemanager.js';
 window.sceneManager = sceneManager;
+
+
+sceneManager.launch("title");
