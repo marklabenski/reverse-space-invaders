@@ -5,7 +5,8 @@ game = {
     score: 0,
     sound: 0,
     music: 0,
-    grid: { rows: 4, cols: 8 }
+    grid: { rows: 4, cols: 8 },
+    invasionSetup: []
 };
 
 //dummy invader array
@@ -74,8 +75,12 @@ function Command() {
         //now add the grid elements
         var gridHTML = "";
         var gridElementCount = game.grid.cols * game.grid.rows;
+        var curCol = 0;
+        var curRow = 0;
         for(var i = 0; i < gridElementCount; i++) {
-            gridHTML += '<div class="grid_element" style="width: ' + gridElementSize + 'px; height: ' + gridElementSize + 'px"></div>';
+            curRow = Math.floor(i / game.grid.cols);
+            curCol = i % game.grid.cols;
+            gridHTML += '<div class="grid_element" data-row="' + curRow + '" data-col="' + curCol + '" style="width: ' + gridElementSize + 'px; height: ' + gridElementSize + 'px"></div>';
         }
         document.getElementsByClassName("grid_element_container")[0].innerHTML = gridHTML;
 
@@ -86,6 +91,14 @@ function Command() {
             elementList[i].addEventListener('drop', this.onInvaderDrop, false);
             elementList[i].addEventListener('dragenter', this.onInvaderDragEnter, false);
             elementList[i].addEventListener('dragover', this.onInvaderDragOver, false);
+        }
+
+        //fill the invasion setup array
+        for(var col = 0; col < game.grid.cols; col++) {
+            game.invasionSetup[col] = new Array();
+            for(var row = 0; row < game.grid.cols; row++) {
+                game.invasionSetup[col][row] = -1;
+            }
         }
     };
 
@@ -174,8 +187,13 @@ function Command() {
         droppedInvader.setAttribute("data-invader_id", cmd.draggedInvader);
         evt.target.appendChild(droppedInvader);
 
+        game.invasionSetup[evt.target.dataset.col][evt.target.dataset.row] = cmd.dragInfo.dragId;
+        console.log(game.invasionSetup);
+
         cmd.dragInfo.dragId =
         cmd.dragInfo.dragSource = false;
+
+
     };
 
     //lets make it simpler to check whether an object has a class
