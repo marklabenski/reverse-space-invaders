@@ -31,7 +31,6 @@ h1 {
 
 .scene#title {
   margin-top: 200px;
-
   ul {
     display: flex;
     flex-direction: column;
@@ -45,7 +44,9 @@ h1 {
 
       &:hover, &.selected {
         font-size: 1.4em;
-        color: #96ff38;
+        color: #fff;
+        cursor: url(../assets/img/cursor.png) 16 16, auto;
+
       }
 
     }

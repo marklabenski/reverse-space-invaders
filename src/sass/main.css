@@ -35,6 +35,7 @@ h1 {
       list-style-type: none; }
       .scene#title ul li.menu:hover, .scene#title ul li.menu.selected {
         font-size: 1.4em;
-        color: #96ff38; }
+        color: #fff;
+        cursor: url(../assets/img/cursor.png) 16 16, auto; }
 
 /*# sourceMappingURL=main.css.map */
