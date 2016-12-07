@@ -4,6 +4,7 @@
  *
  */
 
+
 var gameCore = {
   'tick': 100,
   'heart': {

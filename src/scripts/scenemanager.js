@@ -5,7 +5,7 @@
 var sceneManager = {
   "launch": function (scene) {
     var globalScene = scene;
-    console.log("scenemanager / launch scene:", scene);
+    gameAudio.quiet();
     if (document.querySelectorAll(".scene.shown").length) {
       gameAudio.fadeOut();
       document.querySelector(".scene.shown").classList.remove("shown");

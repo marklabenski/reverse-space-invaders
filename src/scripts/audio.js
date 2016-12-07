@@ -22,6 +22,9 @@ var gameAudio = {
     var oReq = new XMLHttpRequest();
     oReq.onload = this._reqListener;
     oReq.open("get", gameAudio.audioPath + "audiofiles.json", true);
+    oReq.addEventListener("load", function(){
+      sceneManager.launch('title');
+    })
     oReq.send();
   },
   'play': function (soundFile) {
@@ -89,5 +92,4 @@ var gameAudio = {
 }
 
 
-gameAudio.load();
 export { gameAudio }
