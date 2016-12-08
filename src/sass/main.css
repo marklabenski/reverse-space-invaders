@@ -1,10 +1,14 @@
 @font-face {
   font-family: pixel;
   src: url("../assets/font/pixeled.ttf"); }
+* {
+  cursor: url(../assets/img/cursor.png) 16 16, auto; }
+
 body {
   background-color: #000;
   color: #6fec00;
-  font-family: pixel; }
+  font-family: pixel;
+  cursor: url(../assets/img/cursor.png) 16 16, auto; }
 
 h1 {
   font-size: 40px;
@@ -35,7 +39,6 @@ h1 {
       list-style-type: none; }
       .scene#title ul li.menu:hover, .scene#title ul li.menu.selected {
         font-size: 1.4em;
-        color: #fff;
-        cursor: url(../assets/img/cursor.png) 16 16, auto; }
+        color: #fff; }
 
 /*# sourceMappingURL=main.css.map */

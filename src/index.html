@@ -5,7 +5,7 @@
   <title>SIR - Space Invaders Reverse</title>
   <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
-<body onload="gameAudio.load()">
+<body onload="gameAudio.load();">
 <div class="scenes">
   <div id="title" class="scene">
     <div class="maintitle">
@@ -13,6 +13,7 @@
     </div>
     <ul class="titleList">
       <li class="menu" data-scene="commandpost">Start</li>
+      <li class="menu" data-scene="run">Attack!</li>
       <li class="menu" data-scene="impressum">Impressum</li>
       <li class="menu" data-scene="highscore">Highscore</li>
     </ul>
@@ -22,7 +23,7 @@
   </div>
   <div id="run" class="scene">
     <h3>Run</h3>
-    <canvas id="actionCanvas">
+    <canvas id="invaderCanvas">
     </canvas>
   </div>
   <div id="highscore" class="scene">

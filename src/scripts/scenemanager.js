@@ -14,6 +14,9 @@ var sceneManager = {
       document.querySelector("#" + globalScene).classList.add("shown");
     }
     gameAudio.play(gameAudio.playList[globalScene], false);
+    if(scene==="run") {
+      gameCore.gameInit();
+    }
   }
 };
 

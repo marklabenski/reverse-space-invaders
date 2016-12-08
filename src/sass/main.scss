@@ -2,11 +2,14 @@
   font-family: pixel;
   src: url("../assets/font/pixeled.ttf");
 }
-
+* {
+  cursor: url(../assets/img/cursor.png) 16 16, auto;
+}
 body {
   background-color: #000;
   color: #6fec00;
   font-family: pixel;
+  cursor: url(../assets/img/cursor.png) 16 16, auto;
 }
 
 h1 {
@@ -45,8 +48,6 @@ h1 {
       &:hover, &.selected {
         font-size: 1.4em;
         color: #fff;
-        cursor: url(../assets/img/cursor.png) 16 16, auto;
-
       }
 
     }
