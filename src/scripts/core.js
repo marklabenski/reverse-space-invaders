@@ -14,19 +14,61 @@ var gameCore = {
   'sceneBackgrounds': [],
   'stage': null,
   'renderer': null,
-  'attackers': [],
-  'defenders': [],
-  'defendersDirection': -1,
-  'defendersMotionSpeed': 2,
+  'attackers': {
+    'textures': {
+      'obj1': "assets/img/sprite-invader.jpg"
+    },
+    'fleet': null,
+    'fleetDirection': -1,
+    'fleetMaxX': 0,
+    'fleetWalkDown': 0,
+    'fleetMotionSpeed': 2,
+    'ships': [],
+    'update': function() {
+      var threshold = gameCore.attackers.fleet.position.x + gameCore.attackers.fleet.width;
+      if (threshold > gameCore.screenWidth || gameCore.attackers.fleet.position.x < 0) {
+        gameCore.attackers.fleetDirection = gameCore.attackers.fleetDirection * (-1);
+        gameCore.attackers.fleet.position.y = gameCore.attackers.fleet.position.y + 100;
+      } else {
+        gameCore.attackers.fleet.position.y = gameCore.attackers.fleet.position.y;
+      }
+      var motion = (gameCore.attackers.fleetDirection === -1) ? gameCore.attackers.fleetMotionSpeed : gameCore.attackers.fleetMotionSpeed * (-1);
+      gameCore.attackers.fleet.position.x = gameCore.attackers.fleet.position.x + motion;
+    }
+
+  },
+  'defenders': {
+    'textures': {
+      'obj1': "assets/img/sprite-defender.jpg"
+    },
+    'ships': [],
+    'defendersDirection': -1,
+    'defendersMotionSpeed': 10,
+    'update': function() {
+      this.ships[0].position.x = this.ships[0].position.x + (this.defendersMotionSpeed *this.defendersDirection);
+      if (this.ships[0].position.x < 0|| this.ships[0].position.x > (gameCore.screenWidth - 32)) {
+        this.defendersDirection = this.defendersDirection * (-1);
+      }
+    }
+  },
+  'shots': {
+    'textures': {
+      'shot1': "assets/img/sprite-shot.jpg"
+    },
+    'elements': [],
+    'update': function () {
+      for (var i = 0; i < gameCore.shots.elements.length; i++) {
+        gameCore.shots.elements[i].position.y = gameCore.shots.elements[i].position.y - 15;
+        if (gameCore.shots.elements[i].position.y < 0) {
+          gameCore.stage.removeChild(gameCore.shots.elements[i]);
+        }
+      }
+    },
+    'speed': 300
+  },
   'rasterSize': 100,
   'raster': [10, 5],
   'maxAttackers': 50,
-  'fleet': null,
-  'fleetDirection': -1,
-  'fleetMaxX': 0,
-  'fleetWalkDown': 0,
-  'fleetMotionSpeed': 2,
-  'shots': [],
   'addTask': function (id, interval, task) {
   },
   'removeTask': function (id) {
@@ -54,69 +96,56 @@ var gameCore = {
         view: document.getElementById("invaderCanvas")
       }
     );
-    var farTexture = PIXI.Texture.fromImage("assets/img/bg-space-1.jpg");
-    var far = new PIXI.Sprite(farTexture);
-    gameCore.fleet = new PIXI.Container();
-    gameCore.stage.addChild(far);
+
+    var invaderTexture = PIXI.Texture.fromImage(gameCore.attackers.textures.obj1);
+    var invader1 = new PIXI.Sprite(invaderTexture);
+    gameCore.attackers.fleet = new PIXI.Container();
 
     var farTexture2 = PIXI.Texture.fromImage("assets/img/sprite-invader.jpg");
-    var farTexture3 = PIXI.Texture.fromImage("assets/img/sprite-defender.jpg");
+    var farTexture3 = PIXI.Texture.fromImage(gameCore.defenders.textures.obj1);
 
+
+    // Attacker setup
 
     for (var y = 0; y < gameCore.raster[1]; y++) {
       for (var x = 0; x < gameCore.raster[0]; x++) {
         var actual = (x + 1) * (y + 1);
-        gameCore.attackers[actual] = new PIXI.Sprite(farTexture2);
-        gameCore.attackers[actual].position.x = (x * gameCore.rasterSize);
-        gameCore.attackers[actual].position.y = (y * gameCore.rasterSize);
-        gameCore.fleet.addChild(gameCore.attackers[actual]);
-        gameCore.stage.addChild(gameCore.fleet);
+        gameCore.attackers.ships[actual] = new PIXI.Sprite(farTexture2);
+        gameCore.attackers.ships[actual].position.x = (x * gameCore.rasterSize);
+        gameCore.attackers.ships[actual].position.y = (y * gameCore.rasterSize);
+        gameCore.attackers.fleet.addChild(gameCore.attackers.ships[actual]);
+        gameCore.stage.addChild(gameCore.attackers.fleet);
       }
-      gameCore.defenders[0] = new PIXI.Sprite(farTexture3);
-      gameCore.defenders[0].position.x = (gameCore.screenWidth / 2) - 32;
-      gameCore.defenders[0].position.y = gameCore.screenHeight - 200;
-      gameCore.stage.addChild(gameCore.defenders[0]);
+      gameCore.attackers.fleetMaxX = gameCore.screenWidt - gameCore.attackers.fleet.width;
+
+
+      // Defender setup
+
+      gameCore.defenders.ships[0] = new PIXI.Sprite(farTexture3);
+      gameCore.defenders.ships[0].position.x = (gameCore.screenWidth / 2) - 32;
+      gameCore.defenders.ships[0].position.y = gameCore.screenHeight - 200;
+      gameCore.stage.addChild(gameCore.defenders.ships[0]);
     }
-    gameCore.fleetMaxX = gameCore.screenWidt - gameCore.fleet.width;
-    setInterval(gameCore.shoot, 200);
+
+    setInterval(gameCore.shoot, gameCore.shots.speed);
     requestAnimationFrame(gameCore.update);
   },
+
   'shoot': function () {
-    console.log("shot");
-    var farTexture4 = PIXI.Texture.fromImage("assets/img/sprite-shot.jpg");
+    var farTexture4 = PIXI.Texture.fromImage(gameCore.shots.textures.shot1);
 
-    gameCore.shots.push(new PIXI.Sprite(farTexture4));
-    gameCore.shots[gameCore.shots.length - 1].position.x = gameCore.defenders[0].position.x + 36;
-    gameCore.shots[gameCore.shots.length - 1].position.y = gameCore.defenders[0].position.y - 30;
-    gameCore.stage.addChild(gameCore.shots[gameCore.shots.length - 1]);
+    gameCore.shots.elements.push(new PIXI.Sprite(farTexture4));
+    gameCore.shots.elements[gameCore.shots.elements.length - 1].position.x = gameCore.defenders.ships[0].position.x + 36;
+    gameCore.shots.elements[gameCore.shots.elements.length - 1].position.y = gameCore.defenders.ships[0].position.y - 30;
+    gameCore.stage.addChild(gameCore.shots.elements[gameCore.shots.elements.length - 1]);
   },
+
   'update': function () {
-    // fleet
-    var threshold = gameCore.fleet.position.x + gameCore.fleet.width;
-    if (threshold > gameCore.screenWidth || gameCore.fleet.position.x < 0) {
-      gameCore.fleetDirection = gameCore.fleetDirection * (-1);
-      gameCore.fleet.position.y = gameCore.fleet.position.y + 100;
-    } else {
-      gameCore.fleet.position.y = gameCore.fleet.position.y;
-    }
-    var motion = (gameCore.fleetDirection === -1) ? gameCore.fleetMotionSpeed : gameCore.fleetMotionSpeed * (-1);
-    gameCore.fleet.position.x = gameCore.fleet.position.x + motion;
-
-
-    // defender
-
-    //shots
-    for (var i = 0; i < gameCore.shots.length; i++) {
-      gameCore.shots[i].position.y = gameCore.shots[i].position.y - 15;
-      if (gameCore.shots[i].position.y < 0) {
-        gameCore.stage.removeChild(gameCore.shots[i]);
-      }
-    }
-    // main
+    gameCore.attackers.update();
+    gameCore.shots.update();
+    gameCore.defenders.update();
     gameCore.renderer.render(gameCore.stage);
     requestAnimationFrame(gameCore.update);
-
-    // shots
   }
 };
 
